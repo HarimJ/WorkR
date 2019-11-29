@@ -131,3 +131,65 @@ unique(iris[,5])               #중복된 데이터를 하나씩만 뽑아라
 table(iris[, "Species"])               #**많이 사용하는 함수
 table(person.info[ , "blood.type"])    #종류별로 카운트를 세주는 함수. A형 한개, B형 한개, O형 한개. 
 table(person.info[, "gender"])         #F한명, M두명
+
+
+#Matrix/Data Frame 사용 함수
+#행별/열별 합계와 평균 계산
+colSums(iris [, -5]);  apply(iris[, 1:4],2, sum)       #변수의 합계 5는 제외해라. 왜? factor형이니까.==같은내용== apply에서는 data.set, 1:4만큼, 2:컬럼방향 동작. 
+colMeans(iris[,-5]);   apply(iris[, 1:4],2, mean)
+rowSums(iris[,-5]);    apply(iris[, -5],1, sum)
+rowMeans(iris[,-5]);   apply(iris[, -5],1, mean)
+
+apply(iris[,-5],2,median)    #열에 중앙값을 구하겠다.  
+
+#행/열 방향 전환
+z <- matrix(1:20, nrow = 4, ncol = 5)
+z
+t(z)     #행과 열의 값을 바군다. 바꾸면 4열 5행. (전체바꿈)
+
+#조건에 맞는 행과 열의 값 추출(Data Frame만 가능)!!!!!
+IR.1 <- subset(iris, Species == "setosa")                     #부분추출. 품종이 setosa만 추출. 
+IR.1
+IR.2 <- subset(iris, Sepal.Length > 5.0 & Sepal.Width > 4.0)  #부분추출
+IR.2
+IR.2[,c(2,4)]    #변수지정 
+
+
+#Matrix/Data Frame 산술연산
+a <- matrix (1:20, 4,5);   a   
+b <- matrix(21:40, 4,5);   b
+
+2 * a
+b - 5
+2 * a + 3 * b
+
+a + b
+b - a
+b / a
+a * b
+
+#Matrix/Data Frame 자료구조 확인/변환
+class(iris);                 str(iris)         #data.frame에 결과분석
+class(state.x77);            str(state.x77)    #matrix에 결과분석
+is.matrix(iris)
+is.data.frame(iris)
+is.matrix(state.x77)
+is.data.frame(state.x77)
+
+st <- data.frame(state.x77)         #matrix에서 data.frame로 바꿈
+str(st)
+head(st)
+class(st)
+dim(st)
+
+iris.m <- as.matrix(iris[,1:4])    #data.fram에 1부터 4까지를 matrix로 바꿈
+head(iris.m)
+class(iris.m)
+str(iris.m)
+
+head(st)
+Population   #변수명만 쓰면 오류
+attach(st)   #attach는 그 변수 이름을 직접적으로 사용하고 싶으면 변수명을 '직접' 사용이 가능하다 (변수는 세로!열. 같은형의 데이터들 = 즉 벡터)
+Population
+detach(st)   #다시 attach전으로 돌려놓을때. 풀어놓기. 
+Population
