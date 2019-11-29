@@ -193,3 +193,25 @@ attach(st)   #attach는 그 변수 이름을 직접적으로 사용하고 싶으
 Population
 detach(st)   #다시 attach전으로 돌려놓을때. 풀어놓기. 
 Population
+
+#csv file 내용읽기
+setwd("D:/workR")
+air <- read.csv("airquality.csv", header = T)
+
+#이 밑에걸 읽어올때 꼭 확인해서 체크해보기
+class(air)
+dim(air)
+str(air)
+head(air)
+tail(air)
+
+name <- c("Hong", "Kim", "Lee")
+age <- c(22,20,25)
+gender <- factor(c("M","F", "M"))
+blood.type = factor(c("A","O","B"))
+person.info <- data.frame(name, age, gender, blood.type)
+person.info
+
+setwd("D:/workR")
+write.csv(person.info,"person_info.csv", row.names = F)
+
