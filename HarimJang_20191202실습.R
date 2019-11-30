@@ -172,5 +172,5 @@ setwd("D:/workR")
 write.csv(n.1,"rich_state.csv", row.names = F)
 
 #2. 1.에서 만든 rich_state.csv파일을 읽어서 ds 변수에 저장한 후 ds 내용 출력
-read.csv()
-
+ds <- read.csv(file = "rich_state.csv")
+ds
