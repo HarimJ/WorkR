@@ -82,7 +82,7 @@ st.4
 #******18. 문맹률(Illiteracy)이 2.0 이상인 주의 평균 수입은 얼마인지 출력
 stt <- subset(st, Illiteracy >= 2.0)
 stt
-
+mean(stt$Income)
 
 
 #19. 문맹률(Illiteracy)이 2.0 미만인 주와 2.0 이상인 주의 평균 수입의 차이 출력
