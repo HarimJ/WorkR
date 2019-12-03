@@ -178,7 +178,7 @@ pairs(myds[,-6])
 
 #8단계 : 그룹 정보를 포함한 변수 간 상관 관계 확인
 point <- as.integer(myds$grp)
-pairs(myds[,c(-6,-7)], pch = point,
+pairs(myds[,-6], pch = point,
       col = color[point])
 
 #9단계 : 변수 간 상관계수 확인
