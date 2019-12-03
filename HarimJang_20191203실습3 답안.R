@@ -46,7 +46,7 @@ barplot( season.table, main = '선호계절', xlab = '계절', ylab = '빈도' )
 pie(sn, main = 'Season')
 
 
-#문3)
+#문3)연속형 데이터의 일변량
 #학생 A의 과목별 성적이 다음과 같을 때 각 문제를 해결하기 위한 R 코드를 작성하시오.
 
 #KOR ENG ATH HIST SOC MUSIC BIO EARTH PHY ART
@@ -83,6 +83,13 @@ hist(score, main = '학생 성적', col='purple', las = 0 )
 #문4)
 #R에서 제공하는 mtcars 데이터셋에 대해 다음 문제를 해결하기 위한 R코드를 작성하시오.
 
+dim( mtcars )
+str( mtcars )
+head( mtcars )
+tail( mtcars )
+#위에 데이터자료의 분석을 먼저 해야한다. 왜? 자료의 유형(범주/일변/연속)에 따라 분석 방법, 그래프 
+#종류가 달라지기 때문에 꼭 데이터 분석을 하기 전에 dataset 조사를 먼저 할것!!!!!
+
 #1. 중량(wt)의 평균값, 중앙값, 절사평균값(절사범위: 15%), 표준편차를 각각 구하시오.
 mtcars
 mean(mtcars$wt)
@@ -94,11 +101,18 @@ sd(mtcars$wt)
 attach(mtcars)
 summary(wt)
 
-#3. 실린더수(cyl)에 대해 도수분포표를 출력하시오.
-cl <- table(cyl)
+#*****3. 실린더수(cyl)에 대해 도수분포표를 출력하시오.
+cl <- table(cyl); cl
+ 
+#   cly은 숫자형이지만 종류가 한정적이여서 범주형의 모습을 가진다. 
+#   따라서 기본 조사를 할때 num이라고 나와서 무조건 연속형이라고 평균등을 구하면 의미가 없다. 
+#   자료의 성격을 미리 확인하고 내가 뭘 알아낼 것인지 미리 파악하는게 중요***
 
 #4. 앞에서 구한 도수분포표를 막대그래프로 출력하시오.
 barplot(cl, main = 'cyl')
+#   도수분포표는 빈도/개수를 파악할때 사용하는데 cyl이 num이라고 나와도 범주형의 성격을 가지고 있기
+#   때문에 도수분포표를 만들고 그래프를 그림. 
+
 
 #5. 중량(wt)의 히스토그램을 출력하시오.
 hist(wt,main = 'wt')
