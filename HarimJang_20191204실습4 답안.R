@@ -64,7 +64,9 @@ names(cor_mpg)[which.max(a)]
 head( mtcars )
 
 cor( mtcars )
-cor( mtcars )[ 1, ]   # <- ?? 
+cor( mtcars )[ 1, ]   # <- cor(mtcars)를 구했을때 1행에 mpg와 나머지 
+                      # 변수들과의 cor가 나오기 때문에 [1,]을 사용해서 mpg과 다른 변수의 
+                      # 상관계수만 구할 수 있다 
 
 
 
