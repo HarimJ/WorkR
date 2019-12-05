@@ -39,7 +39,7 @@ d <- colSums(c); d
 e <- cbind(b,d); e
 f <- rowSums(e);f 
 
-plot(f, main = "월별 관광객 수",type = 'b', )
+plot(f, main = "월별 관광객 수",type = 'b', xlab = 'Month', ylab = 'Visitors')
 
 
 
