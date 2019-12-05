@@ -124,19 +124,16 @@ books <- data.frame( name = c( "Johns", "Venables", "Tierney", "Ripley", "Ripley
                      other.author = c( NA, "Ripley", NA, NA, NA, NA ) )
 
 books
-#(1)????? surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하시오(두	데이터프레임에서 공통 열의 값이 일치하는 것들만 병합).
-merge(authors, books, by.authors = "surname", by.books = "name")
+#(1)surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하시오(두	데이터프레임에서 공통 열의 값이 일치하는 것들만 병합).
+merge(authors, books, by.x = c("surname"), by.y = c("name"))
 
 
 #(2) surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하되 authors의 행들이 모두 표시되도록 하시오.
-merge(authors, books, by.authors = c("surname"), by.books = c("name"))
+merge(authors, books, by.x = c("surname"), by.y = c("name"), all.x = TRUE)
 
 
 #(3) surname과 name을 공통 열로 하여 authors와 books를 병합하여 출력하되 books의 행들은 모두 표시되도록 하시오.
-
-
-
+merge(authors, books, by.x = c("surname"), by.y = c("name"), all.y = TRUE)
 
 #(4) surname과 other.author를 공통 열로 하여 authors와 books를 병합하여 출력하시오.	
-
-merge(authors, books, by.authors = c("surname"), by.books = c("other.author"))
+merge(authors, books, by.x = c("surname"), by.y = c("other.author"))
