@@ -18,10 +18,6 @@ chart_data <- c(car_Jnum, car_Snum)
 names(chart_data) <- c('제주시', '서귀포시')
 barplot(chart_data, ylab = 'CCTV 수', col = c('skyblue', 'orange'))
 
-ppl <- c(501791, 190241)
-names(ppl) <- c('제주시','서귀포시')
-pie(ppl, col = c("skyblue", "orange"), main = '2018년도 제주시/ 서귀포시 인구분포')
-
 
 vis_K <- read.csv(file = "제주특별자치도_내국인관광객현황_20181231.csv")
 vis_F <- read.csv(file = "제주특별자치도_외국인관광객현황_20181231.csv")
@@ -39,7 +35,28 @@ d <- colSums(c); d
 e <- cbind(b,d); e
 f <- rowSums(e);f 
 
-plot(f, main = "월별 관광객 수",type = 'b', xlab = 'Month', ylab = 'Visitors')
+#plot(f, main = "월별 관광객 수",type = 'b', xlab = 'Month', ylab = 'Visitors')
+
+boxplot(f)    #이상치 없음. 
+
+g <- mean(f); g
+
+ppl <- c(501791, 190241,g)
+names(ppl) <- c('제주시','서귀포시','관광객')
+pie(ppl, col = c("skyblue", "orange","green"), main = '2018년도 제주시, 서귀포시, 관광객 인구분포')
+
+
+head(cctv_2018)
+head(cctv_2018_s)
+cctv <- merge(cctv_2018, cctv_2018_s, all = TRUE)
+cctv
+str(cctv)
+cctv$설치목적구분
+table(cctv$설치목적구분)
+kn <- cctv %>% select(설치목적구분); kn
+plot(kn, main = 'CCTV 설치 목적별 구분')
+
+
 
 
 
