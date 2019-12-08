@@ -261,3 +261,6 @@ merge(authors, books, by.x = c("surname"), by.y = c("name"), all.y = TRUE)
 
 #(4) surname과 other.author를 공통 열로 하여 authors와 books를 병합하여 출력하시오.	
 merge(authors, books, by.x = c("surname"), by.y = c("other.author"))
+
+
+#확인
