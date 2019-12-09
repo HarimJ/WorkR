@@ -119,7 +119,7 @@ View(GNI2014)
 treemap( GNI2014, index = c("continent", "iso3"),   #계층구조 - 대륙 및에 iso(국가)로 나눠라. 
          vSize = "population",                      #타일크기 - 인구수로 
          vColor = "GNI",                            #타일컬러 - 색이 진할 수록 높고 연할수록 낮다. 
-         type = "value",                            #타일컬러링 방법 - 색생의 형태는 숫자로? 해라. 
+         type = "value",                            #타일컬러링 방법 - 색상의 형태는 숫자로? 해라. 
          bg.labels = "yellow",                      #레이블배경색 - 글씨 배경색
          title = "World's GNI" )                    #제목
 
@@ -131,8 +131,8 @@ treemap(st,
         index = c("stname"),
         vSize = "Area",
         vColor = "Income",
-        type = "value",                             #색생의 형태는 숫자로? 해라.  
-        title = "미국 주별 수입입")
+        type = "value",                             #색상의 형태는 숫자로? 해라.  
+        title = "미국 주별 수입")
 
 
 
