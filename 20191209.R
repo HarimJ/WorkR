@@ -22,7 +22,7 @@ ggplot(df, aes(x = month, y = rain)) + geom_bar(stat = "identity",      #aes는 
                                                 width = 0.7,            #stat는 어느 데이터(y)를 막대?로 쓸거냐, 넓이, 색.
                                                 fill = "steelblue")     #identity는 고정값으로 y를, 막대 길이를 y값으로 정한다는 뜻
 
-ggplot(df, aes(x = month, y = rain)) + geom_bar(stat = "identity",      
+ggplot(df, aes(x = month, y = rain)) + geom_bar(stat = "identity",      #여기서 color는 꼭 변수 종류대로 값을 줘야 인식을 할 수 있다. 즉, "빨강", "초록" ,,, 이런식으로 !!
                                                 width = 0.7,            
                                                 fill = "steelblue") +
 ggtitle("월별 강수량") +                                                                   #그래프 이름 정하기
