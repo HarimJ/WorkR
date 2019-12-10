@@ -20,7 +20,7 @@ df
 
 ggplot(df, aes(x = month, y = rain)) + geom_bar(stat = "identity",      #aes는 mapping지정하는 함수라서 ggplot에 써도 되고 geom에 써도 된다. 
                                                 width = 0.7,            #stat는 어느 데이터(y)를 막대?로 쓸거냐, 넓이, 색.
-                                                fill = "steelblue") 
+                                                fill = "steelblue")     #identity는 고정값으로 y를, 막대 길이를 y값으로 정한다는 뜻
 
 ggplot(df, aes(x = month, y = rain)) + geom_bar(stat = "identity",      
                                                 width = 0.7,            
