@@ -6,7 +6,7 @@
 #문1)
 #R에서 제공하는 mtcars 데이터셋에서 gear(기어의 수)에 대해 ggplot으로 막대그래프를 작성하시오. 
 #단, 제목과 x축 레이블은 ‘기어의 수’, y축 레이블은 ‘빈도수’로 나타내시오.
-
+library(tidyverse)
 
 data("mtcars")
 mt <- data.frame(mtcars)
@@ -19,15 +19,11 @@ ggplot(data = mt ) + geom_bar(mapping = aes(x = gear)) +
 ggplot(data = mt) + 
   geom_bar(mapping =aes(x = cyl), fill = "green" )
 
-#!!!! 문3) !!!!
+#문3)
 #R에서 제공하는 mtcars 데이터셋에서 mpg(연비)에 대해 구간 간격이 5.0인 히스토그램을 ggplot으로 작성하시오.
 ggplot(data = mt) +
   geom_histogram(mapping = aes(x = mpg ), binwidth = 5.0)
- 
-#수정 - 둘중 pick. 차이??
-ggplot(mt, aes(x = mpg, binwidth = 5.0)) + geom_histogram()
-ggplot(mt, aes(x = mpg)) + geom_histogram(binwidth  = 5.0)
-mt$mpg
+
 
 #문4)
 #R에서 제공하는 trees 데이터셋의 Girth(나무 둘레)에 대해 ggplot으로 히스토그램을 작성하시오. 
