@@ -46,7 +46,7 @@ ggplot(data = mt) +
 #cyl(실린더 수)에 따라 그룹을 나누어 작성하시오.
 str(mt)
 cyl.1 <- as.factor(mt$cyl)
-ggplot(data = mt, mapping = aes(y = mpg, fill = cyl.1, position = "dodge")) + 
+ggplot(data = mt, mapping = aes(y = mpg, fill = cyl.1)) + 
   geom_boxplot()
 
 #문7) 
