@@ -178,10 +178,9 @@ cen.car <- c(mean(df.car$lon), mean(df.car$lat))
 map.car <- get_googlemap(center = cen.car, maptype = "roadmap", zoom = 11, markers = gc.car)
 gmap.car <- ggmap(map.car)
 gmap.car + 
-  geom_point(data = df.car, aes(x = lon, y = lat), size = sum, alpha = 0.3, col = "blue") + 
-  scale_size_continuous(range = c(1,30))
+  geom_point(data = df.car, aes(x = lon, y = lat, size = sum, alpha = 0.3), col = "blue") + 
+  scale_size_continuous(range = c(1,16))
 
-df.car   #sum이 왜 안될까ㅣ...
 
 
 #문8)
@@ -196,11 +195,12 @@ colnames(j.city) <- c("name", "sum.j");  j.city
 
 gc.jj <- geocode(enc2utf8(c("서귀포","제주")))
 df.jj <- data.frame(lon = gc.jj$lon, lat = gc.jj$lat)
-df.jj <- merge(df.j, j.city)
+df.jj <- merge(df.jj, j.city)
 df.j <- df.jj[c(-2,-3),]
+df.j
 cen.j <- c(mean(df.j$lon), mean(df.j$lat))             
 map.j <- get_googlemap(center = cen.j, maptype = "roadmap", zoom = 11, markers = gc.jj)
 gmap.j <- ggmap(map.j)
 gmap.j + 
-  geom_point(data = df.j, mapping = aes(x = lon, y = lat), size = sum,alpha = 0.3, col = "blue") + 
-  scale_size_continuous(range = c(1,25)) 
+  geom_point(data = df.j, aes(x = lon, y = lat, size = sum.j), alpha = 0.3, col = "blue") + 
+  scale_size_continuous(range = c(8,15)) 
