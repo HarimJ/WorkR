@@ -150,35 +150,57 @@ gmap.3 +
 #문7) 
 #‘2018년도 시군구별 월별 교통사고 자료’로부터 서울시의 각 구별 1년 교통사고 발생건수를 지도상에 원의 크기로 나타내시오.
 
-library(tibble)
+library(ggmap)
+register_google(key = "AIzaSyDlnUhm-Llf-JUjfPpyNG6yEkeZDwoiAi4")
+
+
+install.packages("dplyr")
+library(dplyr)
+
 setwd("d:/")
 car <- read.csv("도로교통공단_시도_시군구별_월별_교통사고(2018).csv")
-car <- as.data.frame(car)
-str(car)
-head(car)
-car <- car[,-3]  
-car
-city <- car$시군구
-city
-gc.car <- geocode(enc2utf8(c("강남구", "강동구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
-                             "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구","영등포구", "용산구", "은평구", "종로구", "중구", "중랑구")))
-cnames <- c("강남구", "강동구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구",
-            "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구","영등포구", "용산구", "은평구", "종로구", "중구", "중랑구")
-df.car <- data.frame(name = cnames, lon = gc.car$lon, lat = gc.car$lat)
+car <- data.frame(car)
+car <- car[,-3]
+car_sum <- car %>%  filter (시도 == '서울') %>% group_by(시군구) %>% summarise(sum(발생건수))
+car_sum
+
+city <- car %>% filter(시도 == '서울') %>% group_by(시군구)
+city_names <- as.vector(city$시군구)
+city_names <- unique(city_names)
+city_names <- as.vector(city_names)
+
+gc.car <- geocode(enc2utf8(city_names))
+df.car <- data.frame(name = city_names, lon = gc.car$lon, lat = gc.car$lat)
+car_sum <- as.data.frame(car_sum)
+colnames(car_sum) <- c("name", "sum")
+df.car <- left_join(df.car, car_sum, by = 'name')
 cen.car <- c(mean(df.car$lon), mean(df.car$lat))
-map.car <- get_googlemap(center = cen.car, maptype = "roadmap", zoom = 9, markers = gc.car)
+map.car <- get_googlemap(center = cen.car, maptype = "roadmap", zoom = 11, markers = gc.car)
 gmap.car <- ggmap(map.car)
 gmap.car + 
-  geom_point(data = car, aes(x = df.car$lon, y = df.car$lat, size = 발생건수, alpha = 0.5, col = "blue"))
-scale_size_continuous(range = c(1,14))
-car
+  geom_point(data = df.car, aes(x = lon, y = lat), size = sum, alpha = 0.3, col = "blue") + 
+  scale_size_continuous(range = c(1,30))
 
-
-
-
-
-
+df.car   #sum이 왜 안될까ㅣ...
 
 
 #문8)
 #7번과 동일한 자료를 이용하여 제주시 1년 교통사고 발생건수를 지도상에 원의 크기로 나타내시오.
+jeju <- read.csv("도로교통공단_시도_시군구별_월별_교통사고(2018).csv")
+jeju <- data.frame(jeju)
+jeju[,-3]
+jeju <- jeju %>% filter(시도 == "제주");  jeju
+j.city <- jeju %>% group_by(시군구) %>% summarise(sum(발생건수))
+j.city <- as.data.frame(j.city)
+colnames(j.city) <- c("name", "sum.j");  j.city
+
+gc.jj <- geocode(enc2utf8(c("서귀포","제주")))
+df.jj <- data.frame(lon = gc.jj$lon, lat = gc.jj$lat)
+df.jj <- merge(df.j, j.city)
+df.j <- df.jj[c(-2,-3),]
+cen.j <- c(mean(df.j$lon), mean(df.j$lat))             
+map.j <- get_googlemap(center = cen.j, maptype = "roadmap", zoom = 11, markers = gc.jj)
+gmap.j <- ggmap(map.j)
+gmap.j + 
+  geom_point(data = df.j, mapping = aes(x = lon, y = lat), size = sum,alpha = 0.3, col = "blue") + 
+  scale_size_continuous(range = c(1,25)) 
