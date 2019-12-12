@@ -243,25 +243,34 @@ str(job)
 
 
 iu <- c(22,36,31,28,27)
+
 yu <- c(6,29,27,14,43)
 su <- c(9,33,33,15,48)
 
-jobk <- data.frame(mean_2016, mean_2018, mean_2019)
+jobk <- data.frame(iu,yu,su)
 str(jobk)
 View(jobk)
 colnames(jobk) <- c("2016","2018",'2019')
 rownames(jobk) <- c("제조업/건설업", "도매/소도매", "숙박/음식점","부동산","기타")
 
-qq<- C(15, 25, 22, 19, 19)
-ww <- C(5, 24.4, 22.7, 11.8, 36.1 )
-ee <- C(6.5, 24.1, 24.1, 10.3, 35)
+iu <- c(15, 25, 22, 19, 19)
+yu <- c(5, 24, 23, 12, 36 )
+su <- c(7, 24, 24, 10, 35)
 
 
+library(ggplot2)
+par(mfrow = c(1,3))
 
+barplot(height = jobk$`2016`, names = row.names(jobk),col="#69b3a2",
+        las=1, main = '2016년 창업희망')
 
+barplot(height = jobk$`2018`, names = row.names(jobk),col="steelblue",
+         las=1, main = '2018년 창업희망')
 
+barplot(height = jobk$`2019`, names = row.names(jobk),col="grey",
+         las=1, main = '2019년 창업희망')
 
-
+par(mfrow = c(1,1))
 
 
 
