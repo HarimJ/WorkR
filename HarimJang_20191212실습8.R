@@ -7,6 +7,8 @@
 #예제소스 파일은 ‘ex_10-1.txt’, ‘ex_10-2.txt’, ‘ex_10-3.txt’이다.
 
 
+#   워드클라우드는 방향성을 알아볼때 많이 사용하고 용이하다 
+
 library(wordcloud)
 library(wordcloud2)
 library(KoNLP)
@@ -26,7 +28,7 @@ text3
 
 buildDictionary(ext_dic = 'woorimalsam')
 pal2 <- brewer.pal(8, 'Dark2')
-noun <- sapply(text1, extractNoun, USE.NAMES = F)
+noun <- sapply(text1, extractNoun, USE.NAMES = F)      # 명사빈도체크 : extractNoun   ( 꼭 해야하는 단계 )
 noun
 
  # 10-1 워드클라우드
