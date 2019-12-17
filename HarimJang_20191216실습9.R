@@ -24,6 +24,8 @@ predict(model, df)
 plot(df$Illiteracy, predict(model, df), col = 'red', cex = 2, pch = 20 )
 abline(model)
 
+ # 훈련 데이터(state.x77)는 w와 b를 구해야 하기 때문에 x,y가 다 있어야 하지만 test data (df)는 y값을 예측하는 것이기 때문에 x 값만 넣으면 된다
+
 
 #문2)
 #trees 데이터셋에서 나무둘레(Girth)로 나무의 볼륨(Volume)을 예측하는 단선형 회귀모델을 만드시오. 그리고 나무 둘레가 8.5, 9.0, 9.5일 때, 나무의 볼륨(Volume)을 예측하여 보시오.
