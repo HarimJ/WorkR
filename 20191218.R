@@ -50,8 +50,23 @@ clusplot( mydata,       # 군집대상
 subset( mydata, fit$cluster == 2 )   # 군집번호가 2번인 데이터만 추출
 
 
-
-
+#
+# 대상 데이터 표준화 후 군집화
+#
+#    데이터와 데이터의 거리를 계산할 때 발생하는 문제 
+#    모든 변수가 거리 계산에 동등한 영향을 갖도록 하기 위해서 모든 변수의 자료 범위를 0 ~ 1 사이로 표준화한 후 거리 계산을 한다
+#
+#    ( x - min( A ) ) / ( max ( A ) - min ( A ) )
+#    x : 변수 A의 임의의 관측값
+#    max( A ), min( A )는 변수 A 관측값 중 최대/최소값
+#    
+#
+std　<- function( x ) {
+  return( ( x - min( x ) )/ ( max( x ) - min( x ) ) )
+}
+mydaya <- apply( iris[ , 1:4 ], 2, std )
+fit <- kmeans( x = mydaya, center = 3 )
+fit
 
 
 
