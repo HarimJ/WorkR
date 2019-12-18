@@ -196,7 +196,7 @@ la
 rownames(la) <- c("기술개발", "자금조달", "업종선정", "사업타당", "행정", "상품개발", "공간확보","정보", "교육", "인력", "마케팅","기타")
 
 View(la)
-par(mfrow = c(2,3))
+par(mfrow = c(2,1))
 barplot(height = la$수도권, names = row.names(la),col = coul, main = "수도권")
 barplot(height = la$충청권, names = row.names(la),col = coul, main = "충청권")
 barplot(height = la$호남권, names = row.names(la),col = coul, main = "호남권")
@@ -274,8 +274,26 @@ par(mfrow = c(1,1))
 
 
 
+#----------------------------
+#창업 사업장 입지
+setwd("d:/")
+wh <- read.csv("창업_사업장_입지.csv", head = F)
+
+a <- c("대학 연구기관", "산업단지", "일반 상업지역", "일반 주택지역",
+       "기타지역" )
 
 
+b <- c(0.8,5.9,  47.5,  35.3,
+        10.4)
+b
+
+df <- data.frame(a, b)
+df
+
+ggplot( df, aes( x = a , y = b)) +
+  geom_bar( stat = "identity", width = 0.7 , fill = "steelblue") +
+  labs(y = '사업장수(개) ' , x = '사업장 위치')+
+  ggtitle('창업 사업장 위치 그래프')
 
 
 
