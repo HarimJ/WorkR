@@ -68,6 +68,46 @@ mydaya <- apply( iris[ , 1:4 ], 2, std )
 fit <- kmeans( x = mydaya, center = 3 )
 fit
 
+#
+# KNN ( K-Nearest Neighbor, K-최근접 이웃 ) 분류 알고리즘
+#
+library( class )
+# 훈련용 / 테스트용 데이터 준비
+tr.idx <- c( 1:25, 51:75, 101:125 )
+ds.tr <- iris[ tr.idx, 1:4 ]    # 훈련용
+ds.ts <- iris[ -tr.idx, 1:4 ]   # 테스트용 ( 훈련용 데이터가 아닌 데이터가 테스트용 데이터. 그래서 -tr.idx )
+cl.tr <- factor( iris[ tr.idx, 5 ] )   # 훈련용 그룹정보
+cl.ts <- factor( iris[ -tr.idx, 5 ] )  # 테스트용 그룹정보
+pred <- knn( ds.tr, ds.ts, cl.tr, k = 3, prob = TRUE )   # k = 3 이면 3개를 체크해본다. 데이터 3개를 묶어서 각각 어느 그릅에 속한지 확인한다 / 
+                                                         # k 값은 정해진게 아니다. 값을 계속 바꿔주면서 좀더 정확한 확률을 구한다 
+pred                                                     # prob = T 여야만 많이 속한 그릅을 알려준다. 꼭 T
+acc <- mean( pred == cl.ts ) 
+acc
+table( pred, cl.ts )
+
+
+#
+# 교차 검증방법 ( k-fold  cross validation ) - KNN 과 다르게 k 폴드는 검증하는 용도! 밑에 k값만 바꿔주면 된다! 
+#
+install.packages( "cvTools")
+library( cvTools )
+
+k = 10           
+folds <- cvFolds( nrow( iris ), K = k )       # 폴드생성 //  iris 데이터를 가지고 훈련을 10번(k값)하겠다. K 는 훈련 횟수 정하기 
+
+acc <- c()   # 폴드별 예측 정확도 저장용 벡터
+for (i in 1:k) {
+  ts.idx <- folds$which == i
+  ds.tr <- iris[ -ts.idx, 1:4 ]
+  ds.ts <- iris[ ts.idx, 1:4 ]
+  cl.tr <- factor( iris[ -ts.idx, 5 ] )
+  cl.ts <- factor( iris[ ts.idx, 5 ] )
+  pred <- knn( ds.tr, ds.ts, cl.tr, k = 5)
+  acc[ i ] <- mean( pred == cl.ts)
+}
+acc   # 폴드별 예측 정확도 (총 10번 돌려서 각각 나온 예측도)
+mean( acc )  # 폴드평균 예측 정확도  (위에 예측도 10번의 평균을 낸 예측도)
+
 
 
 
