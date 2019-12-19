@@ -11,8 +11,8 @@ library(ggplot2)
 
 # 그래프 그리기
 ggplot(total, aes(x = year, y = jper))+
-  geom_segment(mapping = aes(x = year, xend = year, y = 0, yend = jper), color = "steel blue", size = 3) +
-  geom_point( color = "dark orange", size = 7) +
+  geom_segment(mapping = aes(x = year, xend = year, y = 0, yend = jper ), color = "grey", size = 1.5) +
+  geom_point( color = "orange", size = 4) +
   theme_light() +
   theme(
     panel.grid.major.x = element_blank(),
@@ -21,7 +21,8 @@ ggplot(total, aes(x = year, y = jper))+
   ) +
   xlab("") +
   ylab("실업률")+
-  ggtitle(" 제주 청년 실업률")    # 제목으 좀더 두껍게 ????
+  ggtitle(" 제주 청년 실업률") +
+  theme( plot.title = element_text(size =25, face = "bold", color = "orange")  )# 제목으 좀더 두껍게 ????
 
 
 # 종사자, 사업체 수
@@ -45,14 +46,16 @@ library(dplyr)
 library(hrbrthemes)
 
 ggplot(mydata, aes(x = al, y = a))+
-  geom_bar(stat = "identity", fill = ifelse(mydata$al %in% "2018", "dark orange", "grey")) +   # 그래프 사이즈
+  geom_bar(stat = "identity", fill = ifelse(mydata$al %in% "2018", "orange", "grey"), width = 0.4) +   # 그래프 사이즈
   xlab("year") +
   ylab("사업체수")+
-  ggtitle( " 제주 연도별 사업체 수")    # 이름 굵기
+  ggtitle( " 제주 연도별 사업체 수" ) +
+  theme( plot.title = element_text(size =25, face = "bold", color = "orange")  )  # 이름 굵기
 
 
 ggplot(mydata, aes(x = al, y = c))+
-  geom_bar(stat = "identity", fill = ifelse(mydata$al %in% "2018", "dark orange", "grey"), size = 0.2) +   # 그래프 사이즈
+  geom_bar(stat = "identity", fill = ifelse(mydata$al %in% "2018", "orange", "grey"), width = 0.4) +   # 그래프 사이즈
   xlab("year") +
   ylab("종사자 수")+
-  ggtitle( " 제주 연도별 종사자 수") 
+  ggtitle( " 제주 연도별 종사자 수") +
+  theme( plot.title = element_text(size =25, face = "bold", color = "orange")  )
